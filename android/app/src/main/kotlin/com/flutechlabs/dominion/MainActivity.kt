@@ -1,4 +1,4 @@
-package com.example.dominion
+package com.flutechlabs.dominion
 
 import io.flutter.embedding.android.FlutterActivity
 

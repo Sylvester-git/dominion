@@ -15,7 +15,7 @@ class DatabaseDataSourceImpl implements DatabaseDatasource {
       final dio = await api.getDio();
       final response = await dio.get('/health-data/NFC123456');
       if (response.statusCode == 200) {
-        return List<Map<String, dynamic>>.from(response.data);
+        return List<Map<String, dynamic>>.from(response.data['health_data']);
       } else {
         throw Exception('Failed to load sensor data');
       }

@@ -22,7 +22,7 @@ class _HomePageState extends State<HomePage> {
   }
 
   void reloadPeriodically() async {
-    timer = Timer.periodic(const Duration(seconds: 180), (timer) {
+    timer = Timer.periodic(const Duration(seconds: 120), (timer) {
       context.read<GetSensorDataCubit>().refreshSensorData();
     });
   }

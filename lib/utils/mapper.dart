@@ -7,9 +7,9 @@ extension ConvertToHealthDataModel on Map<String, dynamic> {
       heart_rate: this['heart_rate'] as int,
       temperature: this['temperature'] as double,
       blood_pressure: this['blood_pressure'] as String,
-      oxygen_stauration: this['oxygen_stauration'] as double,
+      oxygen_stauration: this['oxygen_saturation'] as double,
       uid: this['uid'] as String,
-      timestamp: this['timestamp'] as String,
+      timestamp: this['recorded_at'] as String,
     );
   }
 }

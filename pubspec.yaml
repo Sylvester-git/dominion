@@ -16,7 +16,9 @@ dependencies:
   intl: 
   google_fonts: 
   lottie: 
+  equatable: 
   fl_chart:
+  supabase_flutter: 
 
 dev_dependencies:
   flutter_test:
@@ -31,6 +33,7 @@ flutter:
   # To add assets to your application, add an assets section, like this:
   assets:
     - assets/lottie/
+    - assets/env.json
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/to/resolution-aware-images

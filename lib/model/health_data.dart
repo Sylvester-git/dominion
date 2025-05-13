@@ -1,0 +1,3 @@
+class HealthDataModel extends Equatable {
+  
+}

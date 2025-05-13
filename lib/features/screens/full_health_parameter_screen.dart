@@ -2,10 +2,13 @@
 
 import 'dart:math';
 
+import 'package:dominion/features/cubit/get_sensor_data_cubit.dart';
+import 'package:dominion/functions.dart';
 import 'package:dominion/model/health_parameter.dart';
 import 'package:dominion/widgets/glass_morph_container.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:lottie/lottie.dart';
 
@@ -16,6 +19,7 @@ class FullHealthParameterScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final getsensorcubit = context.watch<GetSensorDataCubit>();
     List<Color> gradientColors = [
       healthParameter.parameterCardColor,
       healthParameter.parameterCardColor.withOpacity(.8),
@@ -207,7 +211,22 @@ class FullHealthParameterScreen extends StatelessWidget {
                                   TextSpan(
                                     children: [
                                       TextSpan(
-                                        text: healthParameter.parameterValue,
+                                        text:
+                                            (getsensorcubit.state
+                                                        as GetSensorDataLoaded)
+                                                    .healthData
+                                                    .isEmpty
+                                                ? "0"
+                                                : getParameterValue(
+                                                  name:
+                                                      healthParameter
+                                                          .parameterTitle,
+                                                  data:
+                                                      (getsensorcubit.state
+                                                              as GetSensorDataLoaded)
+                                                          .healthData
+                                                          .first,
+                                                ),
                                         style: GoogleFonts.saira(
                                           color: Colors.black,
                                           fontSize: 16,

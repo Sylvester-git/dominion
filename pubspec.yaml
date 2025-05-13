@@ -16,9 +16,11 @@ dependencies:
   intl: 
   google_fonts: 
   lottie: 
+  dio:
+  dartz: 
+  pretty_dio_logger:
   equatable: 
   fl_chart:
-  supabase_flutter: 
 
 dev_dependencies:
   flutter_test:

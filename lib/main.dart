@@ -2,7 +2,6 @@ import 'dart:async';
 import 'dart:developer';
 
 import 'package:dominion/app/app.dart';
-import 'package:dominion/app/init.dart';
 import 'package:dominion/config/config.dart';
 import 'package:flutter/material.dart';
 
@@ -11,7 +10,6 @@ void main() async {
     () async {
       await ConfigServices.loadConfig();
       log(ConfigServices.isLoaded.toString());
-      await AppInit.preRun();
       runApp(MyApp());
     },
     (error, stackTrace) {

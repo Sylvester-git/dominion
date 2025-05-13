@@ -1,5 +1,5 @@
 import "package:dominion/model/health_parameter.dart";
-import "package:dominion/pages/screens/full_health_parameter_screen.dart";
+import "package:dominion/features/screens/full_health_parameter_screen.dart";
 
 import "package:flutter/material.dart";
 

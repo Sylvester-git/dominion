@@ -1,3 +1,4 @@
+import 'package:dominion/features/cubit/get_sensor_data_cubit.dart';
 import 'package:dominion/network/db_ds.dart';
 import 'package:dominion/network/db_repo.dart';
 import 'package:get_it/get_it.dart';
@@ -15,5 +16,10 @@ Future<void> init() async {
     () => DatabaseRepositoryImpl(
       databaseDatasource: instance<DatabaseDatasource>(),
     ),
+  );
+
+  // Registering the GetSensorDataCubit
+  instance.registerFactory<GetSensorDataCubit>(
+    () => GetSensorDataCubit(databaserepo: instance<DatabaseRepository>()),
   );
 }

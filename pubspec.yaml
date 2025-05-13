@@ -17,6 +17,9 @@ dependencies:
   google_fonts: 
   lottie: 
   dio:
+  get_it:
+  flutter_bloc:
+  bloc:
   dartz: 
   pretty_dio_logger:
   equatable: 

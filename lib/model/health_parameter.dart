@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 
 class HealthParameter {
   final String parameterTitle;
-  final String parameterValue;
   final Color parameterCardColor;
   final Widget parameterSmallIcon;
   final Widget? parameterPage;
@@ -13,7 +11,6 @@ class HealthParameter {
 
   const HealthParameter({
     required this.parameterTitle,
-    required this.parameterValue,
     required this.parameterCardColor,
     required this.parameterSmallIcon,
     this.parameterPage,
@@ -26,7 +23,6 @@ class HealthParameter {
 List<HealthParameter> healthParameter = [
   HealthParameter(
     parameterTitle: 'Health Score',
-    parameterValue: '61.3',
     parameterSI: 'pts',
     parameterCardColor: Colors.tealAccent.shade200,
     parameterSmallIcon: Icon(Icons.healing_rounded, color: Colors.teal),
@@ -35,7 +31,6 @@ List<HealthParameter> healthParameter = [
   ),
   HealthParameter(
     parameterTitle: 'Heart Rate',
-    parameterValue: '175',
     parameterSI: 'bpm',
     parameterCardColor: Colors.redAccent.shade100,
     parameterSmallIcon: Icon(Icons.favorite_rounded, color: Colors.red),
@@ -44,7 +39,6 @@ List<HealthParameter> healthParameter = [
   ),
   HealthParameter(
     parameterTitle: 'Blood Pressure',
-    parameterValue: '120/80',
     parameterSI: 'mmHg',
     parameterCardColor: Colors.redAccent.shade100,
     parameterSmallIcon: Icon(Icons.bloodtype, color: Colors.red),
@@ -53,7 +47,6 @@ List<HealthParameter> healthParameter = [
   ),
   HealthParameter(
     parameterTitle: 'Temperature',
-    parameterValue: '36.4',
     parameterSI: '℃',
     parameterCardColor: Colors.redAccent.shade100,
     parameterSmallIcon: Icon(Icons.thermostat_rounded, color: Colors.red),
@@ -62,7 +55,6 @@ List<HealthParameter> healthParameter = [
   ),
   HealthParameter(
     parameterTitle: 'Oxygen Saturation',
-    parameterValue: '96',
     parameterSI: '%',
     parameterCardColor: Colors.blueAccent.shade100,
     parameterSmallIcon: Icon(Icons.air_rounded, color: Colors.blue),

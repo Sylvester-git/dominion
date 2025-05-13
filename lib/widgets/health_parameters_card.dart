@@ -41,14 +41,14 @@ class HealthParametersCard extends StatelessWidget {
                 Text.rich(
                   TextSpan(
                     children: [
-                      TextSpan(
-                        text: healthParameter.parameterValue,
-                        style: GoogleFonts.saira(
-                          color: Colors.black,
-                          fontSize: 16,
-                          fontWeight: FontWeight.w500,
-                        ),
-                      ),
+                      // TextSpan(
+                      //   text: healthParameter.parameterValue,
+                      //   style: GoogleFonts.saira(
+                      //     color: Colors.black,
+                      //     fontSize: 16,
+                      //     fontWeight: FontWeight.w500,
+                      //   ),
+                      // ),
                       TextSpan(
                         text: healthParameter.parameterSI,
                         style: GoogleFonts.roboto(),

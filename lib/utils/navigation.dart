@@ -45,6 +45,7 @@ naviagationHelper({
   required String pagename,
   required HealthParameter healthParameter,
   required List<HealthDataModel> healthData,
+  
 }) {
   switch (pagename.toLowerCase()) {
     case 'health score':

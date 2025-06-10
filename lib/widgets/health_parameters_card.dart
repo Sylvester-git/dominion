@@ -21,6 +21,7 @@ class HealthParametersCard extends StatelessWidget {
           ctx: context,
           healthParameter: healthParameter,
           pagename: healthParameter.parameterTitle,
+          healthData: (getsensorcubit.state as GetSensorDataLoaded).healthData,
         );
       },
 

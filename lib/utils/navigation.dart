@@ -1,3 +1,4 @@
+import "package:dominion/model/health_data.dart";
 import "package:dominion/model/health_parameter.dart";
 import "package:dominion/features/screens/full_health_parameter_screen.dart";
 
@@ -21,10 +22,29 @@ void popNavigation({required BuildContext ctx, required Widget page}) {
   Navigator.pop(ctx);
 }
 
+List getHealthData({
+  required String pagename,
+  required List<HealthDataModel> healthData,
+}) {
+  switch (pagename.toLowerCase()) {
+    case "heart rate":
+      return healthData.map((data) => data.heart_rate).toList();
+    case "blood pressure":
+      return healthData.map((data) => data.blood_pressure).toList();
+    case "temperature":
+      return healthData.map((data) => data.temperature).toList();
+    case "oxygen saturation":
+      return healthData.map((data) => data.oxygen_stauration).toList();
+    default:
+      return healthData;
+  }
+}
+
 naviagationHelper({
   required BuildContext ctx,
   required String pagename,
   required HealthParameter healthParameter,
+  required List<HealthDataModel> healthData,
 }) {
   switch (pagename.toLowerCase()) {
     case 'health score':
@@ -32,7 +52,11 @@ naviagationHelper({
     default:
       return pushNavigation(
         ctx: ctx,
-        page: FullHealthParameterScreen(healthParameter: healthParameter),
+        page: FullHealthParameterScreen(
+          healthParameter: healthParameter,
+          healthData: getHealthData(pagename: pagename, healthData: healthData),
+          
+        ),
       );
   }
 }

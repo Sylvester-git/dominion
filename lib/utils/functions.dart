@@ -14,3 +14,10 @@ String getGreeting() {
 String getDateTime() {
   return DateFormat().add_jm().format(DateTime.now());
 }
+
+(double, double) convertBPtoDouble({required String bp}) {
+  final split = bp.replaceAll('mmHG', '').split('/');
+  final fval = double.parse(split[0]);
+  final sval = double.parse(split[1]);
+  return (fval, sval);
+}

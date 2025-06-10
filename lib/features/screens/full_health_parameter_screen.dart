@@ -5,6 +5,7 @@ import 'dart:math';
 import 'package:dominion/features/cubit/get_sensor_data_cubit.dart';
 import 'package:dominion/functions.dart';
 import 'package:dominion/model/health_parameter.dart';
+import 'package:dominion/utils/functions.dart';
 import 'package:dominion/widgets/glass_morph_container.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
@@ -92,7 +93,6 @@ class FullHealthParameterScreen extends StatelessWidget {
                       ),
                       borderData: FlBorderData(
                         show: true,
-
                         border: Border.all(color: const Color(0xff37434d)),
                       ),
                       minX: 0,
@@ -102,7 +102,15 @@ class FullHealthParameterScreen extends StatelessWidget {
                       lineBarsData: [
                         LineChartBarData(
                           isCurved: true,
-                          spots: generateWeeklyChartData(),
+                          spots: List.generate(
+                            healthData.length,
+                            (index) => FlSpot(
+                              index.toDouble(),
+                              healthData[index] is! String
+                                  ? healthData[index]
+                                  : convertBPtoDouble(bp: healthData[index]).$1,
+                            ),
+                          ),
                           barWidth: 5,
                           isStrokeCapRound: true,
                           dotData: const FlDotData(show: false),

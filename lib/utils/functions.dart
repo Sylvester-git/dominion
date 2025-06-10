@@ -21,3 +21,15 @@ String getDateTime() {
   final sval = double.parse(split[1]);
   return (fval, sval);
 }
+
+List<double> splitLast7Values(List<double> values, {int steps = 7}) {
+  if (values.isEmpty) return [];
+
+  final maxValue = values.reduce((a, b) => a > b ? a : b);
+  final interval = maxValue / (steps - 1);
+
+  return List.generate(
+    steps,
+    (i) => double.parse((i * interval).toStringAsFixed(1)),
+  );
+}

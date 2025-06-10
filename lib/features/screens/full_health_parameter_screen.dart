@@ -1,6 +1,5 @@
 // ignore_for_file: deprecated_member_use
-
-import 'dart:math';
+import 'dart:developer';
 
 import 'package:dominion/features/cubit/get_sensor_data_cubit.dart';
 import 'package:dominion/functions.dart';
@@ -18,10 +17,12 @@ class FullHealthParameterScreen extends StatelessWidget {
     super.key,
     required this.healthParameter,
     required this.healthData,
+    this.isBloodpressure = false,
   });
 
   final HealthParameter healthParameter;
   final List healthData;
+  final bool isBloodpressure;
 
   @override
   Widget build(BuildContext context) {
@@ -31,25 +32,11 @@ class FullHealthParameterScreen extends StatelessWidget {
       healthParameter.parameterCardColor.withOpacity(.8),
     ];
 
-    List<FlSpot> generateWeeklyChartData() {
-      Random random = Random();
-      int totalPoints = 7; // Ensuring x values are at most 7 (0 to 7)
-
-      List<FlSpot> spots = [];
-
-      // First value should have a max y value of 7
-      spots.add(FlSpot(0, 7.0));
-
-      // Generate the rest of the values randomly
-      for (int i = 1; i <= totalPoints; i++) {
-        double xValue = i.toDouble(); // Ensuring x values are between 0 to 7
-        double yValue = random.nextDouble() * 7; // Y values between 0 and <7
-        spots.add(FlSpot(xValue, yValue));
-      }
-
-      return spots;
-    }
-
+    final List<double> last7 =
+        healthData.cast<double>().take(7).map((e) => e).toList();
+    final yTicks = splitLast7Values(last7);
+    final interval = yTicks[1] - yTicks[0]; // Difference between 2 ticks
+    final maxY = yTicks.last;
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
@@ -57,85 +44,96 @@ class FullHealthParameterScreen extends StatelessWidget {
       ),
       body: SafeArea(
         child: Padding(
-          padding: const EdgeInsets.only(top: 30, bottom: 20),
+          padding: const EdgeInsets.only(top: 30, bottom: 20, left: 10),
           child: Column(
             children: [
-              Padding(
-                padding: const EdgeInsets.only(right: 16),
-                child: SizedBox(
-                  height: MediaQuery.sizeOf(context).height / 2,
-                  child: LineChart(
-                    LineChartData(
-                      gridData: FlGridData(
-                        show: true,
-                        drawVerticalLine: true,
-                        horizontalInterval: 1,
-                        verticalInterval: 1,
-                      ),
-                      titlesData: FlTitlesData(
-                        show: true,
-                        rightTitles: const AxisTitles(
-                          sideTitles: SideTitles(showTitles: false),
-                        ),
-
-                        leftTitles: AxisTitles(
-                          sideTitles: SideTitles(
-                            showTitles: true,
-                            interval: 1,
-                            getTitlesWidget: (value, meta) {
-                              return Text(
-                                '${value.toStringAsFixed(1)} ${healthParameter.parameterSI}',
-                              );
-                            },
-                            reservedSize: 60,
-                          ),
-                        ),
-                      ),
-                      borderData: FlBorderData(
-                        show: true,
-                        border: Border.all(color: const Color(0xff37434d)),
-                      ),
-                      minX: 0,
-                      maxX: 7,
-                      minY: 0,
-                      maxY: 7,
-                      lineBarsData: [
-                        LineChartBarData(
-                          isCurved: true,
-                          spots: List.generate(
-                            healthData.length,
-                            (index) => FlSpot(
-                              index.toDouble(),
-                              healthData[index] is! String
-                                  ? healthData[index]
-                                  : convertBPtoDouble(bp: healthData[index]).$1,
-                            ),
-                          ),
-                          barWidth: 5,
-                          isStrokeCapRound: true,
-                          dotData: const FlDotData(show: false),
-                          gradient: LinearGradient(colors: gradientColors),
-                          belowBarData: BarAreaData(
+              isBloodpressure
+                  ? SingleChildScrollView(child: Column(children: [
+                
+              ],
+              ))
+                  : Padding(
+                    padding: const EdgeInsets.only(right: 16),
+                    child: SizedBox(
+                      height: MediaQuery.sizeOf(context).height / 2,
+                      child: LineChart(
+                        LineChartData(
+                          gridData: FlGridData(
                             show: true,
-                            gradient: LinearGradient(
-                              colors:
-                                  gradientColors
-                                      .map(
-                                        (color) => color.withValues(alpha: 0.3),
-                                      )
-                                      .toList(),
+                            drawVerticalLine: true,
+                            horizontalInterval: 1,
+                            verticalInterval: 1,
+                          ),
+                          titlesData: FlTitlesData(
+                            show: true,
+                            rightTitles: const AxisTitles(
+                              sideTitles: SideTitles(showTitles: false),
+                            ),
+                            bottomTitles: const AxisTitles(
+                              sideTitles: SideTitles(showTitles: false),
+                            ),
+                            topTitles: const AxisTitles(
+                              sideTitles: SideTitles(showTitles: false),
+                            ),
+                            leftTitles: AxisTitles(
+                              sideTitles: SideTitles(
+                                showTitles: true,
+                                interval: interval,
+                                getTitlesWidget: (value, meta) {
+                                  return Text(
+                                    '${value.toStringAsFixed(1)} ${healthParameter.parameterSI}',
+                                    style: const TextStyle(fontSize: 10),
+                                  );
+                                },
+                                reservedSize: 60,
+                              ),
                             ),
                           ),
+                          borderData: FlBorderData(
+                            show: true,
+                            border: Border.all(color: const Color(0xff37434d)),
+                          ),
+                          minX: 0,
+                          maxX: last7.length - 1,
+                          minY: 0,
+                          maxY: maxY,
+                          lineBarsData: [
+                            LineChartBarData(
+                              isCurved: true,
+                              spots: List.generate(
+                                last7.length,
+                                (index) =>
+                                    FlSpot(index.toDouble(), last7[index]),
+                              ),
+                              barWidth: 5,
+                              isStrokeCapRound: true,
+                              dotData: const FlDotData(show: true),
+                              gradient: LinearGradient(colors: gradientColors),
+                              belowBarData: BarAreaData(
+                                show: true,
+                                gradient: LinearGradient(
+                                  colors:
+                                      gradientColors
+                                          .map(
+                                            (color) =>
+                                                color.withValues(alpha: 0.3),
+                                          )
+                                          .toList(),
+                                ),
+                              ),
+                            ),
+                          ],
                         ),
-                      ],
+                        duration: Duration(milliseconds: 300),
+                        curve: Curves.easeInOut,
+                      ),
                     ),
-                    duration: Duration(milliseconds: 300),
-                    curve: Curves.easeInOut,
                   ),
-                ),
-              ),
               Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 16),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 16,
+                  vertical: 10,
+                ),
                 child: Row(
                   spacing: 20,
                   children: [

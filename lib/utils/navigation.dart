@@ -55,7 +55,7 @@ naviagationHelper({
         page: FullHealthParameterScreen(
           healthParameter: healthParameter,
           healthData: getHealthData(pagename: pagename, healthData: healthData),
-          
+          isBloodpressure: healthParameter.parameterSI == "mmHg",
         ),
       );
   }

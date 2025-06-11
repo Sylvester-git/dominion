@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:dominion/features/cubit/get_sensor_data_cubit.dart';
 import 'package:dominion/features/home.dart';
 import 'package:flutter/material.dart';

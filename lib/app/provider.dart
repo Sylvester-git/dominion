@@ -7,9 +7,8 @@ MultiBlocProvider getProviders({required Widget child}) {
   return MultiBlocProvider(
     providers: [
       // Add your Bloc providers here
-      BlocProvider(
-        create: (context) => instance<GetSensorDataCubit>()..getSensorData(),
-      ),
+      BlocProvider(create: (context) => instance<GetSensorDataCubit>()),
+    
     ],
     child: child,
   );

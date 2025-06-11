@@ -1,3 +1,4 @@
+import 'package:dominion/features/login.dart';
 import 'package:dominion/utils/functions.dart';
 import 'package:dominion/widgets/health_metrics.dart';
 import 'package:flutter/material.dart';
@@ -60,14 +61,26 @@ class CustomHomeAppBar extends StatelessWidget {
                 ],
               ),
               // Notification bell
-              Container(
-                padding: EdgeInsets.all(12),
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(8),
-                  color: Colors.teal.shade900,
-                ),
-                child: Center(
-                  child: Icon(Icons.notifications_active, color: Colors.white),
+              InkWell(
+                onTap: () {
+                  Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) {
+                        return LoginScreen();
+                      },
+                    ),
+                  );
+                },
+                child: Container(
+                  padding: EdgeInsets.all(12),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(8),
+                    color: Colors.redAccent.withOpacity(.5),
+                  ),
+                  child: Center(
+                    child: Icon(Icons.exit_to_app_rounded, color: Colors.white),
+                  ),
                 ),
               ),
             ],

@@ -37,7 +37,7 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return RefreshIndicator(
       onRefresh: () async {
-        context.read<GetSensorDataCubit>().getSensorData();
+        context.read<GetSensorDataCubit>().refreshSensorData();
       },
       child: Scaffold(
         body: Column(

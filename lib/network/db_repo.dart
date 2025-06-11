@@ -5,7 +5,7 @@ import 'package:dominion/network/fail.dart';
 import 'package:dominion/utils/mapper.dart';
 
 abstract class DatabaseRepository {
-  Future<Either<Failure, List<HealthDataModel>>> getSensorData();
+  Future<Either<Failure, List<HealthDataModel>>> getSensorData({ required String uid});
 }
 
 class DatabaseRepositoryImpl implements DatabaseRepository {
@@ -14,9 +14,9 @@ class DatabaseRepositoryImpl implements DatabaseRepository {
   DatabaseRepositoryImpl({required this.databaseDatasource});
 
   @override
-  Future<Either<Failure, List<HealthDataModel>>> getSensorData() async {
+  Future<Either<Failure, List<HealthDataModel>>> getSensorData({ required String uid}) async {
     try {
-      final result = await databaseDatasource.getSensorData();
+      final result = await databaseDatasource.getSensorData(uid: uid);
       return right(result.map((e) => e.converttohealthdatamodel()).toList());
     } catch (e) {
       return left(Failure(message: e.toString(), code: 500));

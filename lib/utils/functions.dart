@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
 String getGreeting() {
@@ -32,4 +33,15 @@ List<double> splitLast7Values(List<double> values, {int steps = 7}) {
     steps,
     (i) => double.parse((i * interval).toStringAsFixed(1)),
   );
+}
+
+Color getHealthScore({required int healthscore}) {
+  if (healthscore <= 100 && healthscore >= 70) {
+    return Colors.tealAccent.shade200;
+  }
+  if (healthscore < 70 && healthscore >= 50) {
+    return Colors.orangeAccent.shade200;
+  } else {
+    return Colors.redAccent.shade200;
+  }
 }

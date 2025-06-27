@@ -1,6 +1,7 @@
 import 'package:dominion/features/cubit/get_sensor_data_cubit.dart';
 import 'package:dominion/functions.dart';
 import 'package:dominion/model/health_parameter.dart';
+import 'package:dominion/utils/functions.dart';
 import 'package:dominion/utils/navigation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -28,7 +29,21 @@ class HealthParametersCard extends StatelessWidget {
       child: Container(
         margin: EdgeInsets.only(right: 16),
         decoration: BoxDecoration(
-          color: healthParameter.parameterCardColor,
+          color:
+              healthParameter.parameterSI == 'pts'
+                  ? getHealthScore(
+                    healthscore:
+                        double.parse(
+                          getParameterValue(
+                            name: healthParameter.parameterTitle,
+                            data:
+                                (getsensorcubit.state as GetSensorDataLoaded)
+                                    .healthData
+                                    .first,
+                          ),
+                        ).toInt(),
+                  )
+                  : healthParameter.parameterCardColor,
           borderRadius: BorderRadius.circular(10),
         ),
         padding: EdgeInsets.all(10),

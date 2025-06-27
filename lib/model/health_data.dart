@@ -2,7 +2,7 @@ import 'package:equatable/equatable.dart';
 
 class HealthDataModel extends Equatable {
   final int id;
-  final double heart_rate;
+  final int heart_rate;
   final double temperature;
   final String blood_pressure;
   final double oxygen_stauration;

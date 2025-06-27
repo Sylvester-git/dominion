@@ -2,7 +2,7 @@ import 'package:dominion/model/health_data.dart';
 
 double calculateHealthScore(
   double temperature,
-  double heartRate,
+  int heartRate,
   int systolicBp,
   int diastolicBp,
   double oxygenSaturation,
